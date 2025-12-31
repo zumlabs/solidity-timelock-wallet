@@ -1,0 +1,26 @@
+{
+  "name": "solidity-timelock-wallet",
+  "version": "1.0.0",
+  "description": "A simple time-locked wallet smart contract built with Solidity, allowing ETH to be securely locked and withdrawn only after a specified timestamp.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zumlabs/solidity-timelock-wallet.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zumlabs/solidity-timelock-wallet/issues"
+  },
+  "homepage": "https://github.com/zumlabs/solidity-timelock-wallet#readme",
+  "devDependencies": {
+    "@types/node": "^22.19.3",
+    "hardhat": "^3.1.2",
+    "typescript": "~5.8.0"
+  },
+  "type": "module"
+}

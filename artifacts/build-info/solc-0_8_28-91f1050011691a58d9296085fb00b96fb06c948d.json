@@ -1,0 +1,35 @@
+{
+  "_format": "hh3-sol-build-info-1",
+  "id": "solc-0_8_28-91f1050011691a58d9296085fb00b96fb06c948d",
+  "solcVersion": "0.8.28",
+  "solcLongVersion": "0.8.28+commit.7893614a",
+  "userSourceNameMap": {
+    "contracts/TimeLockWallet.sol": "project/contracts/TimeLockWallet.sol"
+  },
+  "input": {
+    "language": "Solidity",
+    "settings": {
+      "evmVersion": "cancun",
+      "outputSelection": {
+        "*": {
+          "": [
+            "ast"
+          ],
+          "*": [
+            "abi",
+            "evm.bytecode",
+            "evm.deployedBytecode",
+            "evm.methodIdentifiers",
+            "metadata"
+          ]
+        }
+      },
+      "remappings": []
+    },
+    "sources": {
+      "project/contracts/TimeLockWallet.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.20;\r\n\r\ncontract TimeLockWallet {\r\n    address public owner;\r\n    uint256 public unlockTime;\r\n\r\n    event Deposited(address indexed from, uint256 amount);\r\n    event Withdrawn(address indexed to, uint256 amount);\r\n\r\n    modifier onlyOwner() {\r\n        require(msg.sender == owner, \"Not owner\");\r\n        _;\r\n    }\r\n\r\n    constructor(uint256 _unlockTime) {\r\n        require(_unlockTime > block.timestamp, \"Unlock time must be in the future\");\r\n        owner = msg.sender;\r\n        unlockTime = _unlockTime;\r\n    }\r\n\r\n    receive() external payable {\r\n        emit Deposited(msg.sender, msg.value);\r\n    }\r\n\r\n    function withdraw() external onlyOwner {\r\n        require(block.timestamp >= unlockTime, \"Funds are locked\");\r\n        uint256 balance = address(this).balance;\r\n        require(balance > 0, \"No balance\");\r\n\r\n        (bool success, ) = owner.call{value: balance}(\"\");\r\n        require(success, \"Transfer failed\");\r\n\r\n        emit Withdrawn(owner, balance);\r\n    }\r\n}\r\n"
+      }
+    }
+  }
+}
