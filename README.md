@@ -25,5 +25,8 @@ The contract allows a user to deposit ETH and set an unlock time. Funds cannot b
 2. Deposit ETH into the contract
 3. Withdraw ETH after the unlock time has passed
 
+## Testing
+This contract includes a Solidity-based unit test executed using Hardhat.
+
 ## License
 MIT
